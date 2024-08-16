@@ -3,15 +3,42 @@ import "./DisplayInfor.scss";
 import logo from "./../logo.svg";
 
 class DisplayInfor extends React.Component {
-  state = {
-    isShowListUser: true,
-  };
+  // Chuan : dung Constructor khai bao state
+  constructor(props) {
+    console.log("Call Constructor: 0");
+    super(props);
+    //babel compiler
+    this.state = {
+      isShowListUser: true,
+    };
+  }
+  // state = {
+  //   isShowListUser: true,
+  // };
+
+  componentDidMount() {
+    console.log("Call me DidMount");
+    setTimeout(() => {
+      document.title = "My React Study";
+    }, 3000);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("Call me DidUpdate", this.props, prevProps);
+    if (this.props.listUsers !== prevProps.listUsers) {
+      if (this.props.listUsers.length === 5) {
+        alert("5 Users");
+      }
+    }
+  }
+
   handleShowHide = () => {
     this.setState({
       isShowListUser: !this.state.isShowListUser,
     });
   };
   render() {
+    console.log("call me render");
     const { listUsers } = this.props;
     console.log(listUsers);
     //prop => properties
