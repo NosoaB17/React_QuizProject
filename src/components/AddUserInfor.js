@@ -59,28 +59,15 @@ import React, { useState } from "react";
 // }
 
 const AddUserInfor = (props) => {
-  // state = {
-  //   name: "SonNB",
-  //   address: "Wuan Nhan",
-  //   age: 23,
-  // };
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
 
   const handleOnChangeInput = (event) => {
-    // this.setState({
-    //   name: event.target.value,
-    // });
     setName(event.target.value);
   };
 
   const handleOnChangeAge = (event) => {
-    //bad code
-    // this.state.age = event.target.value
-    // this.setState({
-    //   age: event.target.value,
-    // });
     setAge(event.target.value);
   };
 

@@ -69,7 +69,7 @@ const MyComponent = (props) => {
         <br></br>
         <DisplayInfor
           listUsers={listUsers}
-          handleDeleteUser={handleAddNewUser}
+          handleDeleteUser={handleDeleteUser}
         />
       </div>
       <div className="b"></div>
