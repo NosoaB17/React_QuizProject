@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DisplayInfor.scss";
-import logo from "./../logo.svg";
 
 // class DisplayInfor extends React.Component {
 //   // Chuan : dung Constructor khai bao state
@@ -44,9 +43,21 @@ import logo from "./../logo.svg";
 // }
 const DisplayInfor = (props) => {
   const { listUsers } = props;
+
+  const [isShowHideListUser, setShowHideListUser] = useState(true); // = this.state = {isShowHideListUser}
+
+  const handleShowHideListUser = () => {
+    setShowHideListUser(!isShowHideListUser);
+  };
+
   return (
     <div className="display-info-container">
-      {true && (
+      <div>
+        <span onClick={() => handleShowHideListUser()}>
+          {isShowHideListUser === true ? "Hide list users" : "Show list users"}
+        </span>
+      </div>
+      {isShowHideListUser && (
         <div>
           {listUsers.map((user, index) => {
             console.log("check user", user);
