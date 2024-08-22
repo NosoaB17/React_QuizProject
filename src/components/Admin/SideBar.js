@@ -1,4 +1,5 @@
 import "react-pro-sidebar/dist/css/styles.css";
+import { Link } from "react-router-dom";
 import { SiReactivex } from "react-icons/si";
 import {
   ProSidebar,
@@ -53,11 +54,18 @@ const SideBar = (props) => {
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem icon={<FaTachometerAlt />}>Dashboard</MenuItem>
+            <MenuItem icon={<FaTachometerAlt />}>
+              Dashboard
+              <Link to="/admins" />
+            </MenuItem>
           </Menu>
           <Menu iconShape="circle">
             <SubMenu icon={<FaGem />} title="Features">
-              <MenuItem> Users </MenuItem>
+              <MenuItem>
+                {" "}
+                Users
+                <Link to="/admins/manage-users" />
+              </MenuItem>
               <MenuItem> Quiz</MenuItem>
               <MenuItem> Question</MenuItem>
             </SubMenu>
