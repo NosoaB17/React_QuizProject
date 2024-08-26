@@ -3,18 +3,26 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./ModalCreateUser.scss";
 import { FcPlus } from "react-icons/fc";
+import axios from "axios";
 
-const ModalCreateUser = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+const ModalCreateUser = (props) => {
+  const { show, setShow } = props;
+  const handleClose = () => {
+    setShow(false);
+    setEmail("");
+    setPassword("");
+    setUsername("");
+    setRole("USER");
+    setImage("");
+    setPreviewImage("");
+  };
   const handleShow = () => setShow(true);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("USER");
-  const [Image, setImage] = useState("");
+  const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
   const handleUploadImage = (event) => {
@@ -26,11 +34,38 @@ const ModalCreateUser = () => {
     }
   };
 
+  const handleSubmitCreateUser = async () => {
+    //validate
+    //call api
+    // let data = {
+    //   email: email,
+    //   password: password,
+    //   username: username,
+    //   role: role,
+    //   userImage: image,
+    // };
+    // console.log(data);
+
+    const data = new FormData();
+
+    data.append("email", email);
+    data.append("password", password);
+    data.append("username", username);
+    data.append("role", role);
+    data.append("userImage", image);
+
+    let res = await axios.post(
+      "http://localhost:8081/api/v1/participant",
+      data
+    );
+    console.log("check res", res);
+  };
+
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      {/* <Button variant="primary" onClick={handleShow}>
         Launch demo modal
-      </Button>
+      </Button> */}
 
       <Modal
         size="xl"
@@ -43,38 +78,38 @@ const ModalCreateUser = () => {
           <Modal.Title>Add new user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className="row g-3">
+          <data className="row g-3">
             <div className="col-md-6">
-              <label className="form-label">Email</label>
+              <label className="data-label">Email</label>
               <input
                 type="email"
-                className="form-control"
+                className="data-control"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">Password</label>
+              <label className="data-label">Password</label>
               <input
                 type="password"
-                className="form-control"
+                className="data-control"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">Username</label>
+              <label className="data-label">Username</label>
               <input
                 type="text"
-                className="form-control"
+                className="data-control"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
               />
             </div>
             <div className="col-md-4">
-              <label className="form-label">Role</label>
+              <label className="data-label">Role</label>
               <select
-                className="form-select"
+                className="data-select"
                 value={role}
                 onChange={(event) => setRole(event.target.value)}
               >
@@ -83,7 +118,7 @@ const ModalCreateUser = () => {
               </select>
             </div>
             <div className="col-md-12">
-              <label className="form-label label-upload" htmlFor="labelUpload">
+              <label className="data-label label-upload" htmlFor="labelUpload">
                 <FcPlus />
                 Upload File Image
               </label>
@@ -101,13 +136,13 @@ const ModalCreateUser = () => {
                 <span>Preview Image</span>
               )}
             </div>
-          </form>
+          </data>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
             Save
           </Button>
         </Modal.Footer>
